@@ -1,0 +1,29 @@
+{
+  "name": "@modernik/react-mlm-tree-view",
+  "version": "1.0.0",
+  "license": "MIT",
+  "repository": "git@github.com:Modernik-Ing/react-mlm-tree-view.git",
+  "author": "Esaie Muhasa <esaiemuhasa.dev@gmail.com>",
+  "devDependencies": {
+    "@types/node": "^22.15.21",
+    "@types/react": "^19.1.5",
+    "@types/react-dom": "^19.1.5",
+    "@vitejs/plugin-react": "^4.5.0",
+    "tsup": "^8.5.0",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "vite"
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ]
+}
