@@ -3,7 +3,7 @@ import {
     Bound,
     Line,
     Orientation,
-    PositionedTreeNode
+    PositionedTreeNode,
 } from '..'
 
 import "./tree-view.scss"
@@ -29,7 +29,13 @@ interface TreeViewProps {
     /** Orientation de l’arbre : 'vertical' ou 'horizontal' */
     orientation: Orientation
     /** Dimensions globales du rendu (largeur/hauteur) */
-    bound: Bound
+    bound: Bound;
+
+    /**
+     * Lors du click sur un item
+     * @param node
+     */
+    onClick?: (node: PositionedTreeNode) => void;
 }
 
 /**
@@ -39,7 +45,13 @@ interface TreeViewProps {
  * @param orientation - Détermine l’orientation des connexions.
  * @param bound - Taille du canevas de rendu.
  */
-const TreeView: FunctionComponent<TreeViewProps> = ({ root, orientation, bound }) => {
+const TreeView: FunctionComponent<TreeViewProps> = ({ root, orientation, bound, onClick }) => {
+
+    const handleClick = (node: PositionedTreeNode) : void => {
+        if (onClick) {
+            onClick(node)
+        }
+    }
     return (
         <div className="mlm-tree-view-container"
              style={{
@@ -61,22 +73,31 @@ const TreeView: FunctionComponent<TreeViewProps> = ({ root, orientation, bound }
                 <NodeConnection node={root} orientation={orientation} />
             </svg>
 
-            <NodeView node={root} />
+            <NodeView node={root} onClick={handleClick} />
         </div>
     )
 }
 
 interface NodeViewProps {
     /** Nœud à afficher avec ses enfants récursivement */
-    node: PositionedTreeNode
+    node: PositionedTreeNode;
+
+    /**
+     * Traitement de l'action du click sur un nœud.
+     */
+    onClick: (node: PositionedTreeNode) => void;
 }
 
 /**
  * Composant récursif qui rend chaque nœud de l'arbre à sa position calculée.
- *
- * @param node - Nœud courant à afficher.
  */
-const NodeView: FunctionComponent<NodeViewProps> = ({ node }) => {
+const NodeView: FunctionComponent<NodeViewProps> = ({ node, onClick }) => {
+
+
+    const handClick = () : void => {
+        onClick(node)
+    }
+
     const box = node.bound
 
     const style = {
@@ -89,19 +110,22 @@ const NodeView: FunctionComponent<NodeViewProps> = ({ node }) => {
 
     return (
         <>
-            <div className="mlm-tree-node" style={style}>
+            <div onClick={handClick} className="mlm-tree-node" style={style}>
                 <div className="mlm-tree-node-content">
                     {node.node.name}
                 </div>
             </div>
             {node.children.map(item => (
-                <NodeView node={item} key={`${item.node.id}`} />
+                <NodeView node={item} key={`${item.node.id}`} onClick={onClick} />
             ))}
         </>
     )
 }
 
-interface ConnectionItemProps extends NodeViewProps {
+interface ConnectionItemProps {
+    /** Nœud à afficher les connextions, memement pour ses enfants récursivement */
+    node: PositionedTreeNode;
+
     /** Ligne de connexion entre deux nœuds */
     line: Line
     /** Orientation des connexions ('vertical' ou 'horizontal') */

@@ -71,8 +71,8 @@ const useCenteredTreeLayout = (
     {
         initialNodeWidth = 120,
         initialNodeHeight = 60,
-        initialSpaceX = 60,
-        initialSpaceY = 100,
+        initialSpaceX = 20,
+        initialSpaceY = 80,
         initialOrientation = 'horizontal'
     }: LayoutOptions = {}
 ): CenteredTreeLayout => {
