@@ -67,19 +67,21 @@ yarn dev
 ```
 
 Ouvre ensuite : [http://localhost:5173](http://localhost:5173)
+![app.tsx](./screenshot.png)
 
 ---
 
 ## Structure du projet
 
 ```
-.
+react-mlm-tree-view/
 ├── src/                 # Code source de la bibliothèque
 │   ├── component/       # Composants React internes
+│   ├── hook/            # Hooks React internes
 │   └── index.ts         # Point d’entrée de la lib
-├── web/                 # Exemple / tests manuels dans le navigateur
-│   └── index.html
-│   └── main.tsx
+│   └── structure.ts     # Definitifion des types (structure des données)
+│   └── app.tsx          # Exemple / tests manuels dans le navigateur
+├── index.html           # point d'entré pour lencer l'exemple
 ├── tsconfig.json
 ├── vite.config.ts       # Pour le dev & test
 ├── tsup.config.ts       # Pour le build de la lib

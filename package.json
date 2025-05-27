@@ -3,27 +3,36 @@
   "version": "1.0.0",
   "license": "MIT",
   "repository": "git@github.com:Modernik-Ing/react-mlm-tree-view.git",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "author": "Esaie Muhasa <esaiemuhasa.dev@gmail.com>",
   "devDependencies": {
     "@types/node": "^22.15.21",
     "@types/react": "^19.1.5",
     "@types/react-dom": "^19.1.5",
     "@vitejs/plugin-react": "^4.5.0",
+    "sass": "^1.89.0",
     "tsup": "^8.5.0",
     "typescript": "^5.8.3",
     "vite": "^6.3.5"
   },
   "scripts": {
-    "build": "tsup",
-    "dev": "vite"
+    "build:css": "sass src/style.scss dist/style.css --style=compressed",
+    "build": "rm -rf dist && tsup && yarn build:css",
+    "dev": "tsc -b && vite",
+    "build-site": "tsc -b && vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ]
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }
