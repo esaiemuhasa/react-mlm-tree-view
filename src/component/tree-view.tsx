@@ -6,8 +6,6 @@ import {
     PositionedTreeNode,
 } from '..'
 
-import "./tree-view.scss"
-
 /**
  * Calcule dynamiquement un décalage pour la courbe de liaison
  * en fonction de la profondeur du nœud afin d'ajuster l'arrondi.

@@ -2,6 +2,7 @@ import React, {ChangeEvent, FormEvent, StrictMode, useEffect, useState} from 're
 import { createRoot } from 'react-dom/client'
 import {useCenteredTreeLayout, type TreeNode, TreeView, PositionedTreeNode} from '.'
 import styles from "./app.module.scss"
+import "./style.scss"
 
 const App = () => {
 
