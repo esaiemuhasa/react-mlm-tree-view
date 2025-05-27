@@ -21,9 +21,9 @@ Il permet d’intégrer facilement une **visualisation interactive** et **modern
 ## Installation
 
 ```bash
-yarn add @modernik/react-mlm-tree-view
+yarn add @modernik-ing/react-mlm-tree-view
 # ou
-npm install @modernik/react-mlm-tree-view
+npm install @modernik-ing/react-mlm-tree-view
 ````
 
 ---
@@ -31,19 +31,58 @@ npm install @modernik/react-mlm-tree-view
 ## Utilisation de base
 
 ```tsx
-import { TreeView } from '@modernik/react-mlm-tree-view';
+import React, {FunctionComponent, useEffect} from 'react'
+import {useCenteredTreeLayout, type TreeNode, TreeView, PositionedTreeNode} from '@modernik-ing/react-mlm-tree-view';
 
-const treeData = {
-  id: 1,
-  name: "Root",
-  children: [
-      { id: 2, name: "Left" },
-      { id: 3, name: "Right" }
-  ]
-};
+const data: TreeNode = {
+    id: 1,
+    name: 'Root',
+    children: [
+        {id: 2, name: 'Child A'},
+        {
+            id: 3, name: 'Child B',
+            children: [
+                {id: 9, name: 'Child H'},
+                {id: 10, name: 'Child I'},
+                {id: 11, name: 'Child J'},
+            ]
+        },
+        {
+            id: 4, name: 'Child C',
+            children: [
+                {id: 5, name: 'Child D'},
+                {
+                    id: 6, name: 'Child E',
+                    children: [
+                        {id: 12, name: 'Child K'},
+                        {id: 13, name: 'Child L'},
+                    ]
+                },
+                {id: 7, name: 'Child F'},
+                {id: 8, name: 'Child G'},
+            ]
+        },
+    ],
+}
 
-export function App() {
-  return <TreeView data={treeData} />;
+const App: FunctionComponent = () => {
+    const {setRoot, rootNode, bound, orientation} = useCenteredTreeLayout();
+
+    useEffect(() => {
+        setRoot(data);
+    }, []);
+
+    const handleNodeClick = (node: PositionedTreeNode): void => {
+        console.log(node, node.node)
+    }
+
+    return (
+        <TreeView root={rootNode} orientation={orientation} bound={bound} onClick={handleNodeClick}/>
+    );
+}
+
+export {
+    App
 }
 ```
 
